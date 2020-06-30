@@ -5,9 +5,7 @@ module.exports = {
   run: async (client, message, args) => {
     const embed = new Discord.RichEmbed()
       .setAuthor(`Me adicione em seu servidor`)
-      .setColor(message.member ? message.member.displayColor : global.CLIENT_DEFAULT_COLOR)
-      .setDescription('**Clique** [**AQUI**](https://discord.com/oauth2/authorize?client_id=722081597079420979&scope=bot&permissions=268435518)')
-
+      .setDescription(`**Clique** [**AQUI**]( https://discord.com/api/oauth2/authorize?client_id=717238561904132147&permissions=8&scope=bot)`)
     message.channel.send(embed)
   },
 

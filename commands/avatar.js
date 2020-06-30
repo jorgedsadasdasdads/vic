@@ -1,4 +1,4 @@
-/**
+/*
  * O Comando "avatar" mostrará a imagem de perfil do usuário ou do bot
  */
 

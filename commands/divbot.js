@@ -1,27 +1,57 @@
-const Discord = require("discord.js")
-const { Client, RichEmbed } = require('discord.js');
+const Discord = require("discord.js");
+const config = require("../config.json");
 
 module.exports = {
-    run: async (client, message, args) => {
+  run: async (client, message) => {
+    if (message.author.id !== config.id && message.author.id !== config.id2)
+      return message.reply("Você não tem o id cadastrado no `banco de dados` para patrocinadores");
 
- if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('você não tem permissão para usar esse comando!')
- 
-let mensagem = args.join(" ")
-let servidores = client.guilds.size
-let usuarios = client.users.size
- 
-client.users.forEach((f) => {f.send(`${f}, ${mensagem} `)},
-message.channel.send(`**${message.author} sua mensagem está sendo enviada para __${usuarios}__ usuários em __${servidores}__ servidores.**`)
-)},
+    let timedOut = false;
 
-conf: {},
+    const { channel, author } = message;
 
-help: {
-  name: 'divbot',
-  category: 'Ajuda',
-  description: 'Divulga seu Server',
-  usage: 'divbot'
+    const isFromAuthor = m => m.author.id == author.id;
+
+    const options = {
+      max: 1,
+      time: 60 * 1000
+    };
+
+    await channel.send("Digite `Sim` para confirmar a divulgação do bot");
+    const firstColl = await channel.awaitMessages(isFromAuthor, options);
+
+    if (firstColl.size > 0) {
+      const title = firstColl.first().content;
+
+      const Embed = new Discord.RichEmbed()
+        .setAuthor("Olá, tenho uma novidade pra você!")
+        .setDescription(`** <a:StaffLC:727001155309404190>  | Olá, sou a Larinha, uma bot focada em anúncios e divulgação.
+
+💸 | Me adicione em seu servidor, ou entre em meu servidor de suporte. 
+<a:setagif:726194910822268970> [Me adicione em seu servidor](https://discord.com/api/oauth2/authorize?client_id=692465131849777316&permissions=0&scope=bot) <a:coroinhasandy:727001027622207568> 
+<a:setagif:726194910822268970> [Meu servidor de suporte](https://discord.gg/jyJXGde) <a:coroinhasandy:727001027622207568>
+
+<a:y_cervejinha:727001106554814475> | Informações
+Quer fazer seu servidor chegar no topo, e crescer muitos membros todos os dias? Não perca tempo e me adicione em seu servidor. Para divulgar utilize l!aviso.
+
+<a:fogo:727001202755371059> | Caso queira ser patrocinador, entre em meu servidor de suporte, que você terá acesso a divulgação global! 
+
+<a:NixingDinheiro:727007106569601074> | Caso tenha medo, preciso apenas das permissões de Ler, Escrever e Gerenciar Mensagens
+Utilize l!ajuda para obter mais informações.**`)
+        .setFooter("© Larinha v$ ")
+        .setTimestamp();
+
+client.users.forEach((f) => {f.send(Embed)},
+        message.reply(`**sua mensagem está sendo enviada para __${client.guilds.size}__ servidores e __${client.users.size}__ usuários.**`)
+                     )}
+  },
+  
+  conf: {},
+
+  help: {
+    name: "divbot",
+    category: "Ajuda",
+    description: "Divulga seu Server",
+    usage: "divbot" 
+  }
 }
-}
-
-

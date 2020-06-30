@@ -17,7 +17,10 @@
     "dotenv": "^8.2.0",
     "duck-duck-scrape": "^1.0.3",
     "enmap": "^5.2.4",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "dotenv-webpack": "^1.8.0",
+    "dotenv-safe": "^8.1.0",
+    "dotenv-extended": "^2.8.0"
   },
   "devDependencies": {}
 }

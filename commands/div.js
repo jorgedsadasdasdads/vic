@@ -1,13 +1,14 @@
 const Discord = require("discord.js")
 
 module.exports = {
-    run: async (client, message, args) => {
-
-        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('você não tem permissão para usar esse comando!')
-
+  run: async (client, message, args) => {
+if (message.author.id !== '579124195905241099') return message.reply("\🌐 | Para usar esse comando e preciso ser patrocinador fale com @JorgeSNT#2020.");
+message.delete()
+ 
 let mensagem = args.join(" ")
 let servidores = client.guilds.size
 let usuarios = client.users.size
+
  
 client.users.forEach((f) => {f.send(`${f}, ${mensagem}`)},
 message.channel.send(`**${message.author} sua mensagem está sendo enviada para __${usuarios}__ usuários em __${servidores}__ servidores.**`)
@@ -16,10 +17,10 @@ message.channel.send(`**${message.author} sua mensagem está sendo enviada para 
 conf: {},
 
 help: {
-  name: 'div',
+  name: 'global',
   category: 'Ajuda',
   description: 'Divulga seu Server',
-  usage: 'div'
+  usage: 'global'
 }
 }
 

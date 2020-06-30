@@ -42,5 +42,44 @@ evtFiles.forEach(f => {
   client.on(eventName, event.bind(null, client))
 })
 
+client.on('message', message => {
+  // If the message is "how to embed"
+  if (message.content === 'l!ajuda') {
+    // We can create embeds using the MessageEmbed constructor
+    // Read more about all that you can do with the constructor
+    // over at https://discord.js.org/#/docs/main/stable/class/RichEmbed
+    const embed = new RichEmbed()
+      // Set the title of the field
+      .setTitle('Ajuda - Larinha v$')
+      .setDescription(`**<a:coroinhasandy:727001027622207568> | Comandos da Larinha v$** \n
+<:seta:726196684211617943> l!aviso 
+<:seta:726196684211617943> l!botinfo
+<:seta:726196684211617943> l!invite
+<:seta:726196684211617943> l!ajuda
+<:seta:726196684211617943> l!avatar
+<:seta:726196684211617943> l!divembed
+`);
+    // Send the embed to the same channel as the message
+    message.channel.send(embed);
+  }
+});
 
-client.login(process.env.AUTH_TOKEN) /* Inicia o Bot. */
+client.on("guildCreate", guild => {
+
+  console.log(`O bot entrou no servidor: ${guild.name} (id: ${guild.id}). População: ${guild.memberCount} membros!`);
+});
+
+
+client.on("guildDelete", guild => {
+  console.log(`O bot foi removido do servidor: ${guild.name} (id: {guild.id})`);
+});
+
+client.on('message', message => {
+  
+if(message.content.startsWith(`<@${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)){
+    return message.channel.send(' <a:CoroaTKF:726199479635673179> | Oih, tudo bem? está precisando de ajuda? digite l!ajuda e veja meus comandos, você não vai se arrepender!') 
+}
+});
+
+
+client.login(process.env.AUTH_TOKEN) /* Inicia o Bot. */     
